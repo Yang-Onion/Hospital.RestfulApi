@@ -2,16 +2,16 @@ package main
 
 import (
 	"database/sql"
+	"dbcommon"
 	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
-import (
-	_ "github.com/mattn/go-adodb"
-)
 
 func main() {
+
+	db := Mssql{}
 
 	router := mux.NewRouter().StrictSlash(true)
 
