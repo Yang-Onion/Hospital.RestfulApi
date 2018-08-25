@@ -1,6 +1,6 @@
 package models
 
-type Team struct {
+type TeamViewModel struct {
 	Id       int    `json:"id"`
 	MinCheng string `json:"mingCheng"`
 }
