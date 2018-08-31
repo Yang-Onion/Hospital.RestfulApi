@@ -1,43 +1,48 @@
-package dbcommon
+package main
 
 import (
 	"database/sql"
 	"flag"
+	"fmt"
+	"log"
+
 	_ "github.com/denisenkom/go-mssqldb"
-	//"strings"
 )
-
-type Mssql struct {
-	Server   string
-	Database string
-	User     string
-	Passwd   string
-	Port     int
-}
-
-func (m *Mssql) Open() (err error) {
-	var conf []string
-	conf = append(conf, "server="+m.Server)
-	conf = append(conf, "Initial Catalog="+m.Database)
-	conf = append(conf, "user id="+m.User)
-	conf = append(conf, "password="+m.Passwd)
-	conf = append(conf, "port="+m.Port)
-
-	//m.DB, err = sql.Open("mssql", strings.Join(conf, ";"))
-	//m.DB, err = sql.Open("mssql", "Data Source=10.4.69.1;User ID=sa;Password=P@ssw0rd;Initial Catalog=Src.Basics;")
-	connString := "Data Source=10.4.69.1;User ID=sa;Password=P@ssw0rd;Initial Catalog=Src.Basics;"
-	conn, err := sql.Open("mssql", connString)
-
-	if err != nil {
-		return err
-	}
-	return nil
-
-}
-
 /*
-func (m *Mssql) Close() (err error) {
+cannot find package "cloud.google.com/go/civil"
+*/
+func test() {
+	query := url.Values{}
+	query.Add("app name", "MyAppName")
+
+	u := &url.URL{
+		Scheme: "sqlserver",
+		User:   url.UserPassword(sa, P@ssw0rd),
+		Host:   fmt.Sprintf("%s:%d", 10.4.69.1, 1433),
+		// Path:  instance, // if connecting to an instance instead of a port
+		RawQuery: query.Encode(),
+	}
+	conn, err := sql.Open("sqlserver", u.String())
+	if err !=nil {
+		 log.Fatal("Open connection failed:",err.Error())
+	}
+	defer conn.Close()
+
+	stmt,err:=conn.Prepare("select name,id from basics.location")
+	if err !=nil {
+		log.Fatal("Prepare failed:",err.Error())
+	}
+	defer stmt.Close()
+
+	row :=stmt.QueryRow()
+	var name string
+	var id int64
+	err =row.Scan(&name,&id)
+	if err !=nil {
+		log.Fatal("Scan failed:",err.Error())
+	}
+	fmt.Printf("id:%d\n", id)
+	fmt.Printf("name:%s\n", name)
 
 
 }
-*/
