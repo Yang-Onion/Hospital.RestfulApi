@@ -1,3 +1,5 @@
+/*
+//cannot find package "cloud.google.com/go/civil"
 package main
 
 import (
@@ -8,9 +10,9 @@ import (
 
 	_ "github.com/denisenkom/go-mssqldb"
 )
-/*
-cannot find package "cloud.google.com/go/civil"
-*/
+
+
+
 func test() {
 	query := url.Values{}
 	query.Add("app name", "MyAppName")
@@ -18,7 +20,7 @@ func test() {
 	u := &url.URL{
 		Scheme: "sqlserver",
 		User:   url.UserPassword(sa, P@ssw0rd),
-		Host:   fmt.Sprintf("%s:%d", 10.4.69.1, 1433),
+		Host:   fmt.Sprintf("%s:%d", 127.0.0.1, 1433),
 		// Path:  instance, // if connecting to an instance instead of a port
 		RawQuery: query.Encode(),
 	}
@@ -46,3 +48,4 @@ func test() {
 
 
 }
+*/

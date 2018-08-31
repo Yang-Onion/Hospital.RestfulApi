@@ -1,4 +1,4 @@
-package main
+package dbcommon
 
 import (
 	"database/sql"
@@ -43,11 +43,11 @@ func (m *Mssql) Open() (err error) {
 	return nil
 }
 
-func main() {
+func test() {
 
 	db := Mssql{
-		DataSource: "10.4.69.1",
-		Database:   "Src.Basics",
+		DataSource: "127.0.0.1",
+		Database:   "demodb",
 		// windwos: true 为windows身份验证，false 必须设置sa账号和密码
 		Windows: false,
 		Sa: SA{
