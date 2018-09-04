@@ -1,15 +1,13 @@
 package controller
 
 import (
-	"../github.com/gorilla/mux"
 	"encoding/json"
-	"fmt"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
 func GetReportByTaskId(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	taskid := vars["id"]
-	fmt.Println(taskid)
-	json.NewEncoder(w).Encode("abc")
+	json.NewEncoder(w).Encode(taskid)
 }

@@ -12,6 +12,4 @@
 *.out
 .vscode
 bin
-github.com
-golang.org
-google-cloud-go
+
