@@ -1,8 +1,8 @@
 package main
 
 import (
+	c "controller"
 	"encoding/json"
-	c "github.com/gorilla/controller"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
