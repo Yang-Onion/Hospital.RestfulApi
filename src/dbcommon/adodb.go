@@ -3,6 +3,7 @@ package dbcommon
 import (
 	"database/sql"
 	"fmt"
+	"models"
 	"strings"
 )
 
@@ -43,7 +44,40 @@ func (m *Mssql) Open() (err error) {
 	return nil
 }
 
-func test() {
+func GetDbConn() (db Mssql) {
+	database := Mssql{
+		DataSource: "127.0.0.1",
+		Database:   "demodb",
+		// windwos: true 为windows身份验证，false 必须设置sa账号和密码
+		Windows: false,
+		Sa: SA{
+			User:   "sa",
+			Passwd: "P@ssw0rd",
+		},
+	}
+	// 连接数据库
+	err := database.Open()
+	if err != nil {
+		fmt.Println("sql open:", err)
+		return
+	}
+	defer database.Close()
+
+	return database
+}
+
+func GetTeamDataList() []TeamViewModel {
+
+	db := GetDbConn()
+	rows, err := db.Query("select id,mincheng from team")
+	if err != nil {
+		fmt.Println("query: ", err)
+		return
+	}
+
+}
+
+func Test() {
 
 	db := Mssql{
 		DataSource: "127.0.0.1",

@@ -2,14 +2,13 @@ package main
 
 import (
 	c "controller"
-	"encoding/json"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
 func main() {
-	router := mux.NewRouter()
+	router := mux.NewRouter().StrictSlash(true)
 	//体检报告 每次20条
 	router.HandleFunc("/api/physical/list", c.GetReportList).Methods("GET")
 	//根据体检任务Id获取体检报告
@@ -23,13 +22,6 @@ func main() {
 	//体检单位
 	router.HandleFunc("/api/physical/team/list", c.GetTeamList).Methods("GET")
 
-	router.HandleFunc("/test/{id}", Test).Methods("GET")
-
 	log.Fatal(http.ListenAndServe(":8080", router))
 
-}
-func Test(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	taskid := vars["id"]
-	json.NewEncoder(w).Encode(taskid)
 }
